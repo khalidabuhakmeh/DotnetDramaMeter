@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:DotnetDramaMeter.ViewModel"
+             x:Class="DotnetDramaMeter.View.MainPage"
+             x:DataType="viewmodel:MainViewModel"
+             Title=".NET Drama Advisory"
+             BackgroundColor="{AppThemeBinding Light={StaticResource LightColor}, Dark={StaticResource DarkColor}}">
+    <ScrollView>
+        <VerticalStackLayout
+            BackgroundColor="{Binding Drama.Level.ScreenBackgroundColor}"
+            >
+            <Label
+                Text=".NET"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="100"
+                Margin="0"
+                FontFamily="OpenSansBold"
+                HorizontalOptions="Center" />
+            <Label
+                Text="Drama Advisory"
+                SemanticProperties.HeadingLevel="Level2"
+                FontSize="30"
+                HorizontalOptions="Center" />
+
+            <AbsoluteLayout
+                Margin="0, 30"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Image
+                    Source="gauge_bg.png"
+                    SemanticProperties.Description="Gauge"
+                    AbsoluteLayout.LayoutBounds="0, 0, 400, 200" />
+                <Image
+                    x:Name="Needle"
+                    Source="needle.png"
+                    SemanticProperties.Description="{Binding Drama.Level.Text}"
+                    AnchorY=".75"
+                    AnchorX=".5"
+                    AbsoluteLayout.LayoutBounds="168, 100, 60, 120" />
+            </AbsoluteLayout>
+
+            <Frame
+                x:Name="DisplayFrame"
+                CornerRadius="10"
+                Margin="20"
+                Padding="3"
+                HasShadow="False"
+                BackgroundColor="{Binding Drama.Level.BackgroundColor}">
+                <Label
+                    FontFamily="OpenSansBold"
+                    Padding="20"
+                    Margin="0"
+                    FontSize="50"
+                    TextTransform="Uppercase"
+                    HorizontalOptions="Fill"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center"
+                    TextColor="{Binding Drama.Level.TextColor}"
+                    Text="{Binding Drama.Level.Text}">
+                </Label>
+            </Frame>
+
+            <Button
+                x:Name="RandomButton"
+                Margin="30"
+                Text="Random Drama"
+                FontFamily="OpenSansRegular"
+                CornerRadius="5"
+                FontSize="20"
+                Command="{Binding RandomDramaCommand}"
+                IsEnabled="{Binding IsNotBusy}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
