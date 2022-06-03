@@ -17,6 +17,7 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Bold.ttf", "OpenSansBold");
             });
 
+        builder.Services.AddSingleton(Vibration.Default);
         builder.Services.AddSingleton<MainPage>();
         builder.Services.AddSingleton<MainViewModel>();
 

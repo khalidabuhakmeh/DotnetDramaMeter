@@ -6,8 +6,11 @@ namespace DotnetDramaMeter.View;
 
 public partial class MainPage
 {
-    public MainPage(MainViewModel viewModel)
+    private readonly IVibration vibration;
+
+    public MainPage(MainViewModel viewModel, IVibration vibration)
     {
+        this.vibration = vibration;
         InitializeComponent();
         BindingContext = viewModel;
         viewModel.PropertyChanged += OnPropertyChanged;
@@ -34,6 +37,8 @@ public partial class MainPage
             RandomButton.Style = null;
             
             vm.IsBusy = false;
+            
+            vibration.Vibrate(TimeSpan.FromMilliseconds(500));
         }
     }
 }
